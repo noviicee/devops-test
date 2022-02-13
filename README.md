@@ -67,10 +67,10 @@ It will be great, if your solution can be used from the box to start whole stack
 `Dockerfile` - should be included, but it isn't, because developer of the app was too lazy for this task... 
 So, it will be first step to build container with this app - writing `Dockerfile` and making first `docker build .`.
 
-- [ ] Choose right base image (Python3.8)
-- [ ] Include all [installation steps](#installation)
-- [ ] Make this app run and listen on HTTP interface
-- [ ] Prepare `docker-compose.yml` for whole app stack, which can be used by developers
+- [x] Choose right base image
+- [x] Include all [installation steps](#installation)
+- [x] Make this app run and listen on HTTP interface
+- [x] Prepare `docker-compose.yml` for whole app stack, which can be used by developers
 
 ## Analysis 
 
@@ -84,7 +84,7 @@ which can be easily used with `pip install -r requirements.test.txt`.
         This project can be verified with [mypy] static types checker, configuration for it can be found in `setup.cfg`
 - [x] Tests<br/>
     There are no so many tests, but you can run them with `pytest .` and get successful results
-- [ ] Code coverage<br/>
+- [x] Code coverage<br/>
     Checkout Python [Coverage] project, 
     or, you can get integration with [CodeCov] or [Coveralls] - they are free for open-source repositories.   
 
