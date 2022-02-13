@@ -9,7 +9,7 @@ semver_re = r'^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-
 
 
 class TestGetProjectVersion(TestCase):
-    def test_get_project_version(self)-> None:
+    def test_get_project_version(self) -> None:
         v = get_project_version()
         self.assertTrue(
             re.match(semver_re, v)

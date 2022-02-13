@@ -1,6 +1,9 @@
-version: "3"
+version: "3.8"
 services:
-  devops-task:
+  web:
     build: .
+    # look in the pwd for a dockerfile
+    # and use that to build the image
     ports:
-      - "8000:5000"
+      - "5000:5000"
+      # localhost to container

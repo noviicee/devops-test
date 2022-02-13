@@ -1,7 +1,6 @@
 import ipaddress
 import logging
 import os
-import sys
 
 from flask import Flask, json, jsonify, render_template, request, wrappers
 from flask_migrate import Migrate
@@ -29,16 +28,17 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 logger = logging.getLogger(__name__)
 
+
 # Health check
 @app.route('/healthz')
-def status():
+def status() -> json:
     response = app.response_class(
-        response=json.dumps({"result":"OK - healthy"}),
+        response=json.dumps({'result': 'OK - healthy'}),
         status=200,
-        mimetype='application/json'
-        )
+        mimetype='application/json')
     app.logger.info('Status request successfull')
     return response
+
 
 class Visitor(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)

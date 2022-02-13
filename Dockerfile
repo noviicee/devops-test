@@ -6,7 +6,11 @@ COPY ./ ./
 # place to copy stuff inside *the container* (./)
 
 RUN pip install -r requirements.txt
-RUN pip install -r requirements.test.txt
+
+HEALTHCHECK --interval=30s --timeout=5s \
+  CMD curl -f http://localhost/ || exit 1
+
+# Docker Healthcheck
 
 EXPOSE 5000
 

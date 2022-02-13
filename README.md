@@ -130,6 +130,7 @@ Also,
     
 ## Monitoring
 
-Monitoring the application.
+I have developed the `healthz` checkpoints, which allows the users to check the status of the application.
+It can be accessed on `\healthz` [endpoint](#application-description).
 
 ## Fixes?
