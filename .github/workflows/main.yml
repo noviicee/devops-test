@@ -1,9 +1,9 @@
 on:
-  push:
+  deployment:
     branches:
       - master
       - noviicee
-name: "Build & Release"
+name: "Build"
 jobs:
   build:
     runs-on: ubuntu-latest
