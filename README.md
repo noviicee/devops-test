@@ -39,6 +39,7 @@ So, this app has some endpoints:
 
 - `/` - main page with all data shown
 - `/version` - JSON response with current app version
+- *`/healthz` - JSON response with status of the application*
 
 ## Files description
 
@@ -78,7 +79,7 @@ As any Docker-ready application - It can be easily configured via environment va
 - [x] Make this app run and listen on HTTP interface
 - [x] Prepare `docker-compose.yml` for whole app stack, which can be used by developers
 
-*Just execute  `docker-compose up` and your application would be up and running in not time.* <br>
+*Just execute  `docker-compose up` and your application would be up and running in no time.* <br>
 *This is another advantage of using containerisation as we are free from the hectic task of sharing the entire code base. We can just share images and our application would be up and running on our local machine in no time.*
 
 ## Analysis 
@@ -109,28 +110,22 @@ which can be easily used with `pip install -r requirements.test.txt`.
 
 Automating the project.
 
-- [ ] GitLab<br/>
-    All you need - `.gitlab-ci.yml` file as described [here][gitlab-ci-yml].
-- [ ] BitBucket<br/>
-    You can also pass this stage using [BitBucket Pipelines][bitbucket-pipelines].
-    Just implement build step and deployment somewhere - from AWS to K8s.
-- [ ] Jenkins<br/>
-    Most complex but more powerfull than others (IMHO). 
-    If you choose it - you need to write working `Jenkinsfile` to achieve the goal.
-    I recommend to use scripted, not declarative pipeline - it would be much better to show your experience.
-    Documentation about Jenkins Pipelines is avaiable [here][jenkins-pipelines].
+*I have used [Github Actions](https://docs.github.com/en/actions) for CI.*
 
 Also,
 
 - [ ] Database Migrations<br/>
     Application should perform DB migrations (as described above) on each deployment to update schema for new code.
-- [ ] Versioning<br/>
+
+- [x] Versioning<br/>
     Current project version can be seen in file `version.txt` and it will be shown as version on web-page.
     What about adding build number to this version and auto-increment it on each build?
+
+    *I have added build number 01 to this version of the appplication and have created the [github-workflow](.github/workflows/main.yml) to trigger on each `deployment` and auto-increment the tag number on each build.*
     
 ## Monitoring
 
-I have developed the `healthz` checkpoints, which allows the users to check the status of the application.
-It can be accessed on `\healthz` [endpoint](#application-description).
+*I have developed the `healthz` checkpoints, which allows the users to check the status of the application.
+It can be accessed on `\healthz` [endpoint](#application-description).*
 
 ## Fixes?
