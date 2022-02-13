@@ -1,37 +1,32 @@
 # Introduction
 
-Looking for an experienced DevOps System Engineer is a challengable task, 
-because it is usually very difficult to estimate all aspects of person's knowledge.
-
-Technical interview can reveal some strong and weak sides of a candidate, 
-but sometimes it leaves opened some questions about real experience.
-And if we are talking about real routin tasks - it's not only about knowledge,
-but also about skills to perform different kind of tasks using manuals, docs and even Google.
-
-So, the main goal of this test task - is to find out how candidate can perform typical DevOps engineer task,
-adopting fresh-written application to run in infrastructure and to be deployed as production environment.
-
-Also, this task shouldn't take more than ~4 hours.
-
-# Application
-
-How it should look: [Running Demo][demo].
-
-![Preview](static/preview.png)
-
-All files you need - are in this GitHub repository. Just clone it from [GitHub][github-repository].
-
 This app is written on Python and is pretty simple. 
-Why Python? In my own opinion, this is preferred language which any Linux engineer should know. 
-But this task is not about programming, so if you don't know Python and are skilled in Bash - It's ok.
+All this App does is to count unique visitors and shows the statistic.
 
-Requirements:
+Running Demo of the application: [Running Demo][demo].
 
-- Python `3.6` (any other `3.x` should work too)
+![Preview](static/screenshot.png)
+
+## Requirements:
+
+- Python `3.x` 
 - PostgreSQL server
 - Packages listed in `requirements.txt` 
 
-All this App does - counts unique visitors and shows this statistic. All it needs is a running database. 
+## Installation
+
+To install the application several steps should be completed:
+
+- Prepare PostgreSQL database
+- Install all required packages with `pip install -r requirements.txt`
+- Set all required environment variables
+- Apply all migrations with `flask db upgrade`
+- Start application
+
+*For starting the application, I have used `python3 app.py`, but you can use different approaches - just choose one from [official docs][flask-deploy].*
+
+
+# Application Description
 
 So, this app has some endpoints:
 
@@ -48,18 +43,6 @@ So, this app has some endpoints:
 - `requirements.test.txt` - list of all Python packages needed for CI/CD tasks
 - `version.txt` - text file with current version
 
-## Installation
-
-To install the application several steps should be completed:
-
-- Prepare PostgreSQL database
-- Install all required packages with `pip install -r requirements.txt`
-- Set all required environment variables
-- Apply all migrations with `flask db upgrade`
-- Start application
-
-For the last step you can use different approaches - just choose one from [official docs][flask-deploy].
-
 ## Configuration
 
 As any Docker-ready application - It can be easily configured via environment variables. So, here is a list of them:
@@ -70,30 +53,22 @@ As any Docker-ready application - It can be easily configured via environment va
 
 # Task
 
-So, now we can talk about the goals. 
-I'm writing just roadmap and any step is optional, but will give additional points if is done correctly.
-If you are good in docs - spend more time on writing good documentation, 
-if you have good experience in clouds - write scalable, fault-tolerant and cloud-ready solution.
-Feel free to choose your way and show your best.
-
-Ideal solution should be fulfilled as a git repository, which will contain all Infrastructure-related code ([IaC]), scenarios, diagrams and documentation as a main `README.md` file. 
-
 ## Infrastructure
 
 I think the best option for this is [Terraform]. But you can also use [Ansible] or [Chef], or any tool you want. 
 It will be great, if your solution can be used from the box to start whole stack on AWS.
 
-- [ ] Start all related servers/instances/logical units
-- [ ] Make required changes in OS
-- [ ] Install Docker (or any other kind of containerization software)
+- [x] Start all related servers/instances/logical units
+- [x] Make required changes in OS
+- [x] Install Docker (or any other kind of containerization software)
 
 ## Containerisation
 
 `Dockerfile` - should be included, but it isn't, because developer of the app was too lazy for this task... 
 So, it will be first step to build container with this app - writing `Dockerfile` and making first `docker build .`.
 
-- [ ] Choose right base image
-- [ ] Include all installation steps
+- [ ] Choose right base image (Python3.8)
+- [ ] Include all [installation steps](#installation)
 - [ ] Make this app run and listen on HTTP interface
 - [ ] Prepare `docker-compose.yml` for whole app stack, which can be used by developers
 
@@ -103,11 +78,11 @@ All tools you need for this section are in `requirements.test.txt` file,
 which can be easily used with `pip install -r requirements.test.txt`.
 
 - [ ] Lintering
-    - [ ] Code style<br/>
+    - [x] Code style<br/>
         Just use [flake8] and configuration from `setup.cfg`
     - [ ] Static typing<br/>
         This project can be verified with [mypy] static types checker, configuration for it can be found in `setup.cfg`
-- [ ] Tests<br/>
+- [x] Tests<br/>
     There are no so many tests, but you can run them with `pytest .` and get successful results
 - [ ] Code coverage<br/>
     Checkout Python [Coverage] project, 
@@ -161,40 +136,3 @@ To draw diagrams you can use [Draw.io][drawio], [CloudCraft] or even [ASCII Art]
 ## Fixes?
 
 There are some problems in app architecture. If you have a solution - it will be great!
-
-# Questions?
-
-If you still have some questions about this task, feel free to [ask me](https://soar.name/contact/).
-
-# License
-
-[![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)][license]
-
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License][license].
-
-[github-clone]: git@github.com:soar/devops-test.git
-[github-repository]: https://github.com/soar/devops-test
-
-[license]: http://creativecommons.org/licenses/by-sa/4.0/
-
-[demo]: https://soars-devops-test.herokuapp.com
-
-[ansible]: https://www.ansible.com
-[aws]: https://aws.amazon.com
-[bitbucket-pipelines]: https://confluence.atlassian.com/bitbucket/build-test-and-deploy-with-pipelines-792496469.html
-[chef]: https://www.chef.io
-[asciiflow]: http://asciiflow.com
-[cloudcraft]: https://cloudcraft.co
-[codecov]: https://codecov.io
-[coverage]: https://coverage.readthedocs.io
-[coveralls]: https://coveralls.io
-[drawio]: http://draw.io
-[flake8]: http://flake8.pycqa.org/en/latest/index.html
-[flask]: http://flask.pocoo.org
-[flask-deploy]: http://flask.pocoo.org/docs/1.0/deploying/#deployment
-[flask-sqlalchemy-connstr]: http://flask-sqlalchemy.pocoo.org/2.3/config/#connection-uri-format
-[gitlab-ci-yml]: https://docs.gitlab.com/ee/ci/yaml/
-[iac]: https://en.wikipedia.org/wiki/Infrastructure_as_code
-[jenkins-pipelines]: https://jenkins.io/doc/book/pipeline/
-[mypy]: https://mypy.readthedocs.io/en/stable/index.html
-[terraform]: https://www.terraform.io

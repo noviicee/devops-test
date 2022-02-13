@@ -13,10 +13,10 @@ APP_DEBUG = bool(int(os.getenv('APP_DEBUG', 0)))
 APP_VERSION = os.getenv('APP_VERSION', get_project_version())
 APP_NAME = os.getenv('APP_NAME', f'devops-test-v{APP_VERSION}')
 
-USER_NAME = os.getenv('USER_NAME', 'n/a')
-USER_URL = os.getenv('USER_URL', '#')
+USER_NAME = os.getenv('USER_NAME', 'noviicee')
+USER_URL = os.getenv('USER_URL', 'https://github.com/noviicee')
 
-DATABASE_URL = os.getenv('DATABASE_URL', '')
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://anamika:singh@localhost/mydatabase')
 
 app = Flask(__name__)
 app.config.update({
