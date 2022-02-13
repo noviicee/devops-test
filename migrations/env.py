@@ -1,8 +1,11 @@
 from __future__ import with_statement
-from alembic import context
-from sqlalchemy import engine_from_config, pool
-from logging.config import fileConfig
+
 import logging
+from logging.config import fileConfig
+
+from alembic import context
+from flask import current_app
+from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -17,7 +20,6 @@ logger = logging.getLogger('alembic.env')
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from flask import current_app
 config.set_main_option('sqlalchemy.url',
                        current_app.config.get('SQLALCHEMY_DATABASE_URI'))
 target_metadata = current_app.extensions['migrate'].db.metadata
@@ -28,7 +30,7 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 # ... etc.
 
 
-def run_migrations_offline():
+def run_migrations_offline()-> None:
     """Run migrations in 'offline' mode.
 
     This configures the context with just a URL
@@ -40,25 +42,24 @@ def run_migrations_offline():
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    url = config.get_main_option('sqlalchemy.url')
     context.configure(url=url)
 
     with context.begin_transaction():
         context.run_migrations()
 
 
-def run_migrations_online():
+def run_migrations_online()-> None:
     """Run migrations in 'online' mode.
 
     In this scenario we need to create an Engine
     and associate a connection with the context.
 
     """
-
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema
     # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
-    def process_revision_directives(context, revision, directives):
+    def process_revision_directives(context, revision, directives) -> None:
         if getattr(config.cmd_opts, 'autogenerate', False):
             script = directives[0]
             if script.upgrade_ops.is_empty():
@@ -74,7 +75,7 @@ def run_migrations_online():
                       target_metadata=target_metadata,
                       process_revision_directives=process_revision_directives,
                       **current_app.extensions['migrate'].configure_args)
-    
+
     try:
         with context.begin_transaction():
             context.run_migrations()
@@ -83,6 +84,7 @@ def run_migrations_online():
         raise exception
     finally:
         connection.close()
+
 
 if context.is_offline_mode():
     run_migrations_offline()

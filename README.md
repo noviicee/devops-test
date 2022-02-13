@@ -3,9 +3,12 @@
 This app is written on Python and is pretty simple. 
 All this App does is to count unique visitors and shows the statistic.
 
-Running Demo of the application: [Running Demo][demo].
+Running Demo of the application:
 
+*Running Demo*
 ![Preview](static/screenshot.png)
+
+*The application is currently set to eun on port:5000*.
 
 ## Requirements:
 
@@ -19,12 +22,16 @@ To install the application several steps should be completed:
 
 - Prepare PostgreSQL database
 - Install all required packages with `pip install -r requirements.txt`
-- Set all required environment variables
+- Set all required [environment variables](#configuration)
 - Apply all migrations with `flask db upgrade`
+
+## Starting the Application
+
 - Start application
 
-*For starting the application, I have used `python3 app.py`, but you can use different approaches - just choose one from [official docs][flask-deploy].*
+*For starting the application, I have used `python3 app.py`, but you can use different approaches - just choose one from [official docs](http://flask.pocoo.org/docs/1.0/deploying/#deployment).*
 
+<hr>
 
 # Application Description
 
@@ -51,12 +58,11 @@ As any Docker-ready application - It can be easily configured via environment va
 - `USER_NAME` - your name, which will be shown on the page
 - `USER_URL` - some kind of your personal URL
 
-# Task
+<hr>
+
+# The Task
 
 ## Infrastructure
-
-I think the best option for this is [Terraform]. But you can also use [Ansible] or [Chef], or any tool you want. 
-It will be great, if your solution can be used from the box to start whole stack on AWS.
 
 - [x] Start all related servers/instances/logical units
 - [x] Make required changes in OS
@@ -64,36 +70,44 @@ It will be great, if your solution can be used from the box to start whole stack
 
 ## Containerisation
 
-`Dockerfile` - should be included, but it isn't, because developer of the app was too lazy for this task... 
-So, it will be first step to build container with this app - writing `Dockerfile` and making first `docker build .`.
+*I have made use of Docker and included a `Dockerfile`.*
+*The image is built using `docker build .` and a variety of other commands. The image has also been pushed to [Dockerhub](dockerhub.com)*.
 
 - [x] Choose right base image
 - [x] Include all [installation steps](#installation)
 - [x] Make this app run and listen on HTTP interface
 - [x] Prepare `docker-compose.yml` for whole app stack, which can be used by developers
 
+*Just execute  `docker-compose up` and your application would be up and running in not time.* <br>
+*This is another advantage of using containerisation as we are free from the hectic task of sharing the entire code base. We can just share images and our application would be up and running on our local machine in no time.*
+
 ## Analysis 
 
 All tools you need for this section are in `requirements.test.txt` file,
 which can be easily used with `pip install -r requirements.test.txt`.
 
-- [ ] Lintering
+- [x] Lintering
     - [x] Code style<br/>
-        Just use [flake8] and configuration from `setup.cfg`
-    - [ ] Static typing<br/>
+        I have used [flake8] to check the coding style.<br>
+        ![preview](images/flake8.png) <br>
+        *Here I have excluded the ./venv directory while checking for flake8 coding style because there is no need to scan it*
+
+    - [x] Static typing<br/>
         This project can be verified with [mypy] static types checker, configuration for it can be found in `setup.cfg`
+
 - [x] Tests<br/>
-    There are no so many tests, but you can run them with `pytest .` and get successful results
+    There are no so many tests, but you can run them with `pytest .` and get successful results<br>
+    ![preview](images/pytest.png)
+
 - [x] Code coverage<br/>
     Checkout Python [Coverage] project, 
     or, you can get integration with [CodeCov] or [Coveralls] - they are free for open-source repositories.   
 
+>*--- to be completed*
+
 ## CI/CD
 
-At this stage you already have project, that can be built and verified for some kind of issues. 
-It's time to automate it.
-
-Choose one of CI/CD you like:
+Automating the project.
 
 - [ ] GitLab<br/>
     All you need - `.gitlab-ci.yml` file as described [here][gitlab-ci-yml].
@@ -106,7 +120,7 @@ Choose one of CI/CD you like:
     I recommend to use scripted, not declarative pipeline - it would be much better to show your experience.
     Documentation about Jenkins Pipelines is avaiable [here][jenkins-pipelines].
 
-And of course don't forget about:
+Also,
 
 - [ ] Database Migrations<br/>
     Application should perform DB migrations (as described above) on each deployment to update schema for new code.
@@ -116,23 +130,6 @@ And of course don't forget about:
     
 ## Monitoring
 
-Just prepare some examples, how this app could be monitored. 
-Docker Healthchecks or rules on AWS Route53 - anything will be accepted as solution.
-
-## Documentation
-
-Documentation should include key points such as:
-
-- [ ] What technologies were used and what tools are needed to use your solution?
-- [ ] How to start this service from scratch using your solution?
-
-Also, you may write additional docs like:
-
-- [ ] How to scale number of servers to take more load?
-- [ ] What is application deployment architecture diagram?
-
-To draw diagrams you can use [Draw.io][drawio], [CloudCraft] or even [ASCII Art][asciiflow]. Include them in your repository too.
+Monitoring the application.
 
 ## Fixes?
-
-There are some problems in app architecture. If you have a solution - it will be great!
