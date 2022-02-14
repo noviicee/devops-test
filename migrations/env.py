@@ -2,6 +2,7 @@ from __future__ import with_statement
 
 import logging
 from logging.config import fileConfig
+from typing import List, Any
 
 from alembic import context
 from flask import current_app
@@ -59,7 +60,7 @@ def run_migrations_online() -> None:
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema
     # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
-    def process_revision_directives(context, revision, directives) -> None:
+    def process_revision_directives(context: Any, revision: Any, directives: List[Any]) -> None:
         if getattr(config.cmd_opts, 'autogenerate', False):
             script = directives[0]
             if script.upgrade_ops.is_empty():

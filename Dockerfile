@@ -1,18 +1,26 @@
-FROM python:3.8
-LABEL maintainer="Anamika"
+#Use a Python base image in version 2.7
+FROM python:3.8.0
 
-COPY ./ ./
+# Copy necessary files and folders
+COPY ./ /app
 # path to folder to copy on *your machine* relative to build context (./)
-# place to copy stuff inside *the container* (./)
+# place to copy stuff inside *the container* (/app)
 
+# setting the work directory
+WORKDIR /app
+
+#Expose the application port 5000
+EXPOSE 5000
+
+#Install packages defined in the requirements.txt file
 RUN pip install -r requirements.txt
 
+# Apply all migrations
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+# Docker Healthcheck
 HEALTHCHECK --interval=30s --timeout=5s \
   CMD curl -f http://localhost/ || exit 1
 
-# Docker Healthcheck
-
-EXPOSE 5000
-
-# command to run on container start
-CMD [ "python3", "app.py" ]
+#The application should execute at the container start
+CMD ["python", "app.py"]
