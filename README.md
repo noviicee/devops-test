@@ -108,7 +108,7 @@ As any Docker-ready application - It can be easily configured via environment va
 - [x] Choose base image
 - [x] Include all [installation steps](#installation)
 - [x] Make this app run and listen on HTTP interface
-- [x]Entrypoint: Used to set executables that will always run when the container is initiated.
+- [x] Entrypoint: Used to set executables that will always run when the container is initiated.
 - [x] Healthcheck: You'll see the container's healthiness in the STATUS column when you run docker ps 
 
 
