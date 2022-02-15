@@ -1,4 +1,4 @@
-#Use a Python base image in version 2.7
+#Use base image
 FROM python:3.8.0
 
 # Copy necessary files and folders
