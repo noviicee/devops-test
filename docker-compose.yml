@@ -7,3 +7,10 @@ services:
     ports:
       - "5000:5000"
       # localhost to container
+  postgres:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
+

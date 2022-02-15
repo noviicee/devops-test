@@ -103,17 +103,28 @@ As any Docker-ready application - It can be easily configured via environment va
 ## Containerisation
 
 * *I have made use of Docker and included a [Dockerfile](Dockerfile).*
-* *The image is built using `docker build .` and a variety of other commands. The image has also been pushed to [Dockerhub](dockerhub.com)*.
 
-> *more steps--- to be added*
-
-- [x] Choose right base image
+**Dockerfile**
+- [x] Choose base image
 - [x] Include all [installation steps](#installation)
 - [x] Make this app run and listen on HTTP interface
+- [x]Entrypoint: Used to set executables that will always run when the container is initiated.
+- [x] Healthcheck: You'll see the container's healthiness in the STATUS column when you run docker ps 
+
+
+**The Image**
+
+1. Build the image.<br>
+`docker build -t <image-name> . (-t is the tag command)`
+
+2. Run the image. <br>
+`docker run -d -p 5000:5000 <image-name>`; *(d-detach, p-expose to port from_container -> to_host)*
+
 - [x] Prepare `docker-compose.yml` for whole app stack, which can be used by developers
 
 *Just execute  `docker-compose up` and your application would be up and running in no time.* <br>
-*This is another advantage of using containerisation as we are free from the hectic task of sharing the entire code base. We can just share images and our application would be up and running on our local machine in no time.*
+*This is another advantage of using containerisation as 
+we are free from the hectic task of developing code in a specific computing environment which, when transferred to a new location, may result in bugs and errors. We can just share images and our application would be up and running on our local machine in no time.*
 
 ## Analysis 
 
