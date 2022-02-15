@@ -2,7 +2,7 @@ from __future__ import with_statement
 
 import logging
 from logging.config import fileConfig
-from typing import List, Any
+from typing import Any, List
 
 from alembic import context
 from flask import current_app
